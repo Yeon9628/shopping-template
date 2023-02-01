@@ -1,17 +1,17 @@
-// Fetch the items from the JSON file
+// JSON 파일에서 항목 가져오기
 function loadItems() {
   return fetch('data/data.json')
     .then(response => response.json())
     .then(json => json.items);
 }
 
-// Update the list with the given items
+// 주어진 항목으로 목록 업데이트
 function displayItems(items){
   const container = document.querySelector('.items');
   container.innerHTML = items.map(item => createHTMLString(item)).join('');
 }
 
-// Create HTML list item from the given date item
+// 주어진 항목에서 HTML 목록 항목 만들기
 function createHTMLString(item) {
   return `
     <li class="item">
@@ -34,6 +34,7 @@ function onButtonClick(event, items) {
   displayItems(filtered);
 }
 
+// logo를 누르면 전체 리스트를 보여주고 buttons를 누르면 필터링 된 리스트를 보여준다.
 function setEventListeners(items) {
   const logo = document.querySelector('.logo');
   const buttons = document.querySelector('.buttons');
@@ -44,7 +45,6 @@ function setEventListeners(items) {
 // main
 loadItems()
   .then(items => {
-    console.log(items);
     displayItems(items);
     setEventListeners(items);
 })
